@@ -31,25 +31,25 @@ typedef struct identite2	// Structure de la 2ème ligne d'ennemis
 static ligne_ennemis2 pos2;
 static ligne_ennemis2 etat2;
 
-void Place_Caractere(uint8_t x, uint8_t y, const volatile char *s)
+void Place_Caractere(uint8_t x, uint8_t y, const volatile char *s)// Fonction qui affiche un caractère en X et Y
 {
 	vt100_move(x, y);
 	serial_puts(s);
 	return;
 }
 
-void Tire_vaisseau(int x, int y_ennemis, int y_ennemis2, int y_tir)
+void Tire_vaisseau(int x, int y_ennemis, int y_ennemis2, int y_tir)	// Tir ennemis qui prend en compte la hitbox
 {
 	Place_Caractere(x + 2, y_tir, "|");
 	Delai(5);
 	for (int i = 0; i < 5; i++)
 	{
 		if ((y_tir == y_ennemis + 1)
-				&& (x + 2 == pos.tab_x[i] || x + 2 == pos.tab_x[i] + 1
+				&& (x + 2 == pos.tab_x[i] || x + 2 == pos.tab_x[i] + 1// Condition si Y tir = y ennemis de la premeiere ligne
 						|| x + 2 == pos.tab_x[i] + 2
 						|| x + 2 == pos.tab_x[i] + 3))
 		{
-			if (etat.etat[i] == 0)
+			if (etat.etat[i] == 0)// Condition pour savoir si le vaisseau est vivant
 			{
 
 				Place_Caractere(pos.tab_x[i], y_ennemis, "    ");
@@ -82,7 +82,7 @@ void Tire_vaisseau(int x, int y_ennemis, int y_ennemis2, int y_tir)
 	return;
 }
 
-int* Set_Pos_Ennemis(int x_start, int ecart, int numero_ligne_ennemis)
+int* Set_Pos_Ennemis(int x_start, int ecart, int numero_ligne_ennemis)// Fonction qui rempli tableau de x et etat pour chaque vaisseau ennemis
 {
 	int i = 0;
 	for (; i < 5; i++)
@@ -126,7 +126,7 @@ int* Set_Pos_Ennemis(int x_start, int ecart, int numero_ligne_ennemis)
 
 }
 
-void Affichage_Ennemis(int x[], int y, const volatile char *s, int numero_ligne)
+void Affichage_Ennemis(int x[], int y, const volatile char *s, int numero_ligne)// Affichage des ennemis grace au tableau en x rempli
 {
 	int i = 0;
 	for (; i < 5; i++)
@@ -152,32 +152,9 @@ void Affichage_Ennemis(int x[], int y, const volatile char *s, int numero_ligne)
 	}
 }
 
-int borne_gauche(int x_start)
-{
-	if (pos.etat[0] == 1)
-	{
-		x_start = etat2.etat[0];
 
-		if (etat2.etat[0] == 1)
-		{
-			x_start = pos.etat[1];
 
-			if (pos.etat[1] == 1)
-			{
-				x_start = etat2.etat[1];
-
-				if (etat2.etat[1] == 1)
-				{
-					x_start = pos.etat[2];
-				}
-			}
-		}
-	}
-
-	return x_start;
-}
-
-void restart()
+void restart()					// Fonction qui restart les valeurs par default
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -188,7 +165,7 @@ void restart()
 	}
 }
 
-void Delai(unsigned long n)
+void Delai(unsigned long n)						// Fonction de delai
 {
 	int i = 0;
 	unsigned long int max = n * 100000;

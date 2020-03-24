@@ -12,7 +12,7 @@
 #include "unistd.h"
 #include "vaisseau.h"
 
-void Start_Menu()
+void Start_Menu()							// fonction qui affiche le menu
 {
 	int i = 10;
 	for (i = 10; i <= 70; i++)
@@ -34,7 +34,7 @@ void Start_Menu()
 	Place_Caractere(52, 22, "Appuyez sur R pour RESTART");
 }
 
-void Bordure()
+void Bordure()								// fonction qui affiche les bordures
 {
 	int i = 1;
 	for (i = 1; i <= 80; i++)

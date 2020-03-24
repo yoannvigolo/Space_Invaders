@@ -74,26 +74,24 @@ int main(void)
 		Affichage_Ennemis(Set_Pos_Ennemis(x_start2, 15, 2), y_ennemis2, "/::\\",
 				2);
 
-		x_start = borne_gauche(x_start);
-
 		int touche = serial_get_last_char();
 		Place_Caractere(t, 22, "/<I>\\");
 
-		if (touche == 'd' && t < 74)
+		if (touche == 'd' && t < 74)// Condition pour le deplacement vers la droite
 		{
 			Place_Caractere(t, 22, "     ");
 			t += 2;
 			Place_Caractere(t, 22, "/<I>\\");
 		}
 
-		if (touche == 'q' && t > 3)
+		if (touche == 'q' && t > 3)	// Condition pour le déplacement vers la gauche
 		{
 			Place_Caractere(t, 22, "     ");
 			t -= 2;
 			Place_Caractere(t, 22, "/<I>\\");
 		}
 
-		if (touche == 'z')
+		if (touche == 'z')				// Condition pour le tir du vaisseau
 		{
 			Tire_vaisseau(t, y_ennemis, y_ennemis2, y_tir);
 			y_tir -= 1;
@@ -103,7 +101,7 @@ int main(void)
 			}
 		}
 
-		if (touche == 'r')
+		if (touche == 'r')							// Condition pour le restart
 		{
 			t = 40;
 			restart();
@@ -115,7 +113,7 @@ int main(void)
 			goto restart;
 		}
 
-		if (i == 40)
+		if (i == 40)// Condition qui permet le deplacement de 1 pour tous les vaisseaux ennemis
 		{
 
 			if (compteur == 0)
